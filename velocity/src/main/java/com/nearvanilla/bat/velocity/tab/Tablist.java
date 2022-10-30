@@ -80,7 +80,7 @@ public class Tablist {
      * @return the list of tablist entries
      */
     public @NonNull List<TabListEntry> entries(final @NonNull TabList tabList) {
-        return profileEntries
+        return this.profileEntries
                 .stream()
                 .sorted(Comparator.comparing(GameProfile::getName))
                 .map(gameProfile ->

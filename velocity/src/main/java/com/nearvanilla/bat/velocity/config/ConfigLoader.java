@@ -70,7 +70,7 @@ public class ConfigLoader {
     }
 
     private @NonNull PluginConfig loadConfiguration() {
-        final File configFile = new File(dataDirectory.toFile(), "bat.conf");
+        final File configFile = new File(this.dataDirectory.toFile(), "bat.conf");
 
         final @NonNull HoconConfigurationLoader loader = HoconConfigurationLoader
                 .builder()

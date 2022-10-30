@@ -21,7 +21,7 @@ public class LuckPermsListener {
 
     @Subscribe
     public void onGroupChange(final @NonNull UserDataRecalculateEvent event) {
-        server.getPlayer(event.getUser().getUniqueId()).ifPresent(this.tablistService::handleServerConnection);
+        this.server.getPlayer(event.getUser().getUniqueId()).ifPresent(this.tablistService::handleServerConnection);
     }
 
 }

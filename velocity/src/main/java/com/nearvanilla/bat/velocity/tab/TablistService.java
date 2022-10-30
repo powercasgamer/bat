@@ -92,7 +92,7 @@ public class TablistService {
 
         this.tablistMap.clear();
 
-        this.config = configLoader.batConfig();
+        this.config = this.configLoader.batConfig();
         for (final var entry : this.config.tablists.entrySet()) {
             final String id = entry.getKey();
             final TablistConfig tablistConfig = entry.getValue();
@@ -113,7 +113,7 @@ public class TablistService {
             this.tablistUpdateTask.cancel();
         }
 
-        this.tablistUpdateTask = server.getScheduler()
+        this.tablistUpdateTask = this.server.getScheduler()
                 .buildTask(this.plugin, this::updateTablists)
                 .repeat(this.config.updateFrequency, TimeUnit.MILLISECONDS)
                 .schedule();
@@ -241,9 +241,9 @@ public class TablistService {
         return TagResolver.resolver(List.of(
                 Placeholder.parsed("groupcode", groupCodeFormat),
                 Placeholder.parsed("servercode", serverCodeFormat),
-                Placeholder.unparsed("proxycount", Integer.toString(server.getPlayerCount())),
-                Placeholder.unparsed("proxymax", Integer.toString(server.getConfiguration().getShowMaxPlayers())),
-                Placeholder.component("proxymotd", server.getConfiguration().getMotd()),
+                Placeholder.unparsed("proxycount", Integer.toString(this.server.getPlayerCount())),
+                Placeholder.unparsed("proxymax", Integer.toString(this.server.getConfiguration().getShowMaxPlayers())),
+                Placeholder.component("proxymotd", this.server.getConfiguration().getMotd()),
                 Placeholder.unparsed("servercount", Integer.toString(onlinePlayers)),
                 Placeholder.unparsed("servermax", Integer.toString(maxPlayers)),
                 Placeholder.component("servermotd", motd),
@@ -347,7 +347,7 @@ public class TablistService {
     }
 
     public int ping(final @NonNull UUID uuid) {
-        final Optional<Player> player = server.getPlayer(uuid);
+        final Optional<Player> player = this.server.getPlayer(uuid);
         return player.map(Player::getPing).orElse(-1L).intValue();
     }
 
